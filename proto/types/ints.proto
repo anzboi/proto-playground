@@ -1,0 +1,11 @@
+syntax = 'proto3';
+
+package types;
+
+message Int {
+    int64 num = 1;
+}
+
+message FixedInt {
+    fixed64 num = 1;
+}

@@ -1,0 +1,25 @@
+syntax = 'proto3';
+
+package types;
+
+message Message {
+    int32 int_field = 1;
+    string string_field = 2;
+}
+
+message MessageV2 {
+    int32 int_field = 1;
+    string string_field = 2;
+}
+
+message MessageV3 {
+    int32 int_field = 1;
+    string string_field = 2;
+    map<string,string> string_map = 3;
+}
+
+message MessageV4 {
+    int32 foo = 1;
+    string string_field = 2;
+    map<string,string> string_map = 3;
+}

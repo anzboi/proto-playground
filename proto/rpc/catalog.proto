@@ -1,0 +1,41 @@
+syntax = 'proto3';
+
+package rpc;
+
+service Catalog {
+    rpc ListProducts(ListProductsRequest) returns (ProductList) {}
+    rpc GetProduct(GetProductRequest) returns (Product) {}
+    rpc CreateProduct(CreateProductRequest) returns (Product) {}
+    rpc DeleteProduct(DeleteProductRequest) returns (Product) {}
+}
+
+message Product {
+    int64 product_id = 1;
+    string name = 2;
+    string description = 3;
+}
+
+message ProductList {
+    repeated Product products = 1;
+}
+
+message GetProductRequest {
+    int64 product_id = 1;
+}
+
+message CreateProductRequest {
+    Product product = 1;
+}
+
+message DeleteProductRequest {
+    int64 product_id = 1;
+}
+
+message ListProductsRequest {
+    PaginationParameters pagination_parameters = 1;
+}
+
+message PaginationParameters {
+    int32 index = 1;
+    int32 page_size = 2;
+}

@@ -1,0 +1,15 @@
+syntax = 'proto3';
+
+package my_application;
+
+service HelloWorld {
+    rpc Foo(FooRequest) returns (FooResponse);
+}
+
+message FooRequest {
+    string id = 1 [(validate.rules).uuid = true];
+}
+
+message FooResponse {
+    string message = 1;
+}

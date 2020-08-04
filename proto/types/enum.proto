@@ -1,0 +1,13 @@
+syntax = 'proto3';
+
+package types;
+
+enum Code {
+    UNKNOWN = 0;
+    Code_ONE = 1;
+    Code_TWO = 2;
+}
+
+message Status {
+    Code code = 1;
+}

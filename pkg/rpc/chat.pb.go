@@ -194,6 +194,232 @@ func (x *Message) GetMessage() string {
 	return ""
 }
 
+type ChatRoom struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	RoomId string `protobuf:"bytes,1,opt,name=room_id,json=roomId,proto3" json:"room_id,omitempty"`
+}
+
+func (x *ChatRoom) Reset() {
+	*x = ChatRoom{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_rpc_chat_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ChatRoom) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ChatRoom) ProtoMessage() {}
+
+func (x *ChatRoom) ProtoReflect() protoreflect.Message {
+	mi := &file_rpc_chat_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ChatRoom.ProtoReflect.Descriptor instead.
+func (*ChatRoom) Descriptor() ([]byte, []int) {
+	return file_rpc_chat_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *ChatRoom) GetRoomId() string {
+	if x != nil {
+		return x.RoomId
+	}
+	return ""
+}
+
+type CreateChatRoomRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Private bool `protobuf:"varint,1,opt,name=private,proto3" json:"private,omitempty"`
+}
+
+func (x *CreateChatRoomRequest) Reset() {
+	*x = CreateChatRoomRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_rpc_chat_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CreateChatRoomRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateChatRoomRequest) ProtoMessage() {}
+
+func (x *CreateChatRoomRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_rpc_chat_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateChatRoomRequest.ProtoReflect.Descriptor instead.
+func (*CreateChatRoomRequest) Descriptor() ([]byte, []int) {
+	return file_rpc_chat_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *CreateChatRoomRequest) GetPrivate() bool {
+	if x != nil {
+		return x.Private
+	}
+	return false
+}
+
+type ListChatRoomsRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *ListChatRoomsRequest) Reset() {
+	*x = ListChatRoomsRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_rpc_chat_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ListChatRoomsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListChatRoomsRequest) ProtoMessage() {}
+
+func (x *ListChatRoomsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_rpc_chat_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListChatRoomsRequest.ProtoReflect.Descriptor instead.
+func (*ListChatRoomsRequest) Descriptor() ([]byte, []int) {
+	return file_rpc_chat_proto_rawDescGZIP(), []int{5}
+}
+
+type ListChatRoomsResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ChatRooms []*ChatRoom `protobuf:"bytes,1,rep,name=chat_rooms,json=chatRooms,proto3" json:"chat_rooms,omitempty"`
+}
+
+func (x *ListChatRoomsResponse) Reset() {
+	*x = ListChatRoomsResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_rpc_chat_proto_msgTypes[6]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ListChatRoomsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListChatRoomsResponse) ProtoMessage() {}
+
+func (x *ListChatRoomsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_rpc_chat_proto_msgTypes[6]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListChatRoomsResponse.ProtoReflect.Descriptor instead.
+func (*ListChatRoomsResponse) Descriptor() ([]byte, []int) {
+	return file_rpc_chat_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *ListChatRoomsResponse) GetChatRooms() []*ChatRoom {
+	if x != nil {
+		return x.ChatRooms
+	}
+	return nil
+}
+
+type DeleteChatRoomRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	RoomId string `protobuf:"bytes,1,opt,name=room_id,json=roomId,proto3" json:"room_id,omitempty"`
+}
+
+func (x *DeleteChatRoomRequest) Reset() {
+	*x = DeleteChatRoomRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_rpc_chat_proto_msgTypes[7]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeleteChatRoomRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteChatRoomRequest) ProtoMessage() {}
+
+func (x *DeleteChatRoomRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_rpc_chat_proto_msgTypes[7]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteChatRoomRequest.ProtoReflect.Descriptor instead.
+func (*DeleteChatRoomRequest) Descriptor() ([]byte, []int) {
+	return file_rpc_chat_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *DeleteChatRoomRequest) GetRoomId() string {
+	if x != nil {
+		return x.RoomId
+	}
+	return ""
+}
+
 var File_rpc_chat_proto protoreflect.FileDescriptor
 
 var file_rpc_chat_proto_rawDesc = []byte{
@@ -211,11 +437,38 @@ var file_rpc_chat_proto_rawDesc = []byte{
 	0x61, 0x67, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28,
 	0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61,
 	0x67, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67,
-	0x65, 0x32, 0x38, 0x0a, 0x08, 0x43, 0x68, 0x61, 0x74, 0x52, 0x6f, 0x6f, 0x6d, 0x12, 0x2c, 0x0a,
-	0x04, 0x43, 0x68, 0x61, 0x74, 0x12, 0x10, 0x2e, 0x72, 0x70, 0x63, 0x2e, 0x43, 0x68, 0x61, 0x74,
-	0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x1a, 0x0c, 0x2e, 0x72, 0x70, 0x63, 0x2e, 0x4d, 0x65,
-	0x73, 0x73, 0x61, 0x67, 0x65, 0x22, 0x00, 0x28, 0x01, 0x30, 0x01, 0x62, 0x06, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x33,
+	0x65, 0x22, 0x23, 0x0a, 0x08, 0x43, 0x68, 0x61, 0x74, 0x52, 0x6f, 0x6f, 0x6d, 0x12, 0x17, 0x0a,
+	0x07, 0x72, 0x6f, 0x6f, 0x6d, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06,
+	0x72, 0x6f, 0x6f, 0x6d, 0x49, 0x64, 0x22, 0x31, 0x0a, 0x15, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65,
+	0x43, 0x68, 0x61, 0x74, 0x52, 0x6f, 0x6f, 0x6d, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12,
+	0x18, 0x0a, 0x07, 0x70, 0x72, 0x69, 0x76, 0x61, 0x74, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08,
+	0x52, 0x07, 0x70, 0x72, 0x69, 0x76, 0x61, 0x74, 0x65, 0x22, 0x16, 0x0a, 0x14, 0x4c, 0x69, 0x73,
+	0x74, 0x43, 0x68, 0x61, 0x74, 0x52, 0x6f, 0x6f, 0x6d, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x22, 0x45, 0x0a, 0x15, 0x4c, 0x69, 0x73, 0x74, 0x43, 0x68, 0x61, 0x74, 0x52, 0x6f, 0x6f,
+	0x6d, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x2c, 0x0a, 0x0a, 0x63, 0x68,
+	0x61, 0x74, 0x5f, 0x72, 0x6f, 0x6f, 0x6d, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x0d,
+	0x2e, 0x72, 0x70, 0x63, 0x2e, 0x43, 0x68, 0x61, 0x74, 0x52, 0x6f, 0x6f, 0x6d, 0x52, 0x09, 0x63,
+	0x68, 0x61, 0x74, 0x52, 0x6f, 0x6f, 0x6d, 0x73, 0x22, 0x30, 0x0a, 0x15, 0x44, 0x65, 0x6c, 0x65,
+	0x74, 0x65, 0x43, 0x68, 0x61, 0x74, 0x52, 0x6f, 0x6f, 0x6d, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x12, 0x17, 0x0a, 0x07, 0x72, 0x6f, 0x6f, 0x6d, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x06, 0x72, 0x6f, 0x6f, 0x6d, 0x49, 0x64, 0x32, 0x83, 0x02, 0x0a, 0x0b, 0x43,
+	0x68, 0x61, 0x74, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x2c, 0x0a, 0x04, 0x43, 0x68,
+	0x61, 0x74, 0x12, 0x10, 0x2e, 0x72, 0x70, 0x63, 0x2e, 0x43, 0x68, 0x61, 0x74, 0x4d, 0x65, 0x73,
+	0x73, 0x61, 0x67, 0x65, 0x1a, 0x0c, 0x2e, 0x72, 0x70, 0x63, 0x2e, 0x4d, 0x65, 0x73, 0x73, 0x61,
+	0x67, 0x65, 0x22, 0x00, 0x28, 0x01, 0x30, 0x01, 0x12, 0x3d, 0x0a, 0x0e, 0x43, 0x72, 0x65, 0x61,
+	0x74, 0x65, 0x43, 0x68, 0x61, 0x74, 0x52, 0x6f, 0x6f, 0x6d, 0x12, 0x1a, 0x2e, 0x72, 0x70, 0x63,
+	0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x68, 0x61, 0x74, 0x52, 0x6f, 0x6f, 0x6d, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x0d, 0x2e, 0x72, 0x70, 0x63, 0x2e, 0x43, 0x68, 0x61,
+	0x74, 0x52, 0x6f, 0x6f, 0x6d, 0x22, 0x00, 0x12, 0x48, 0x0a, 0x0d, 0x4c, 0x69, 0x73, 0x74, 0x43,
+	0x68, 0x61, 0x74, 0x52, 0x6f, 0x6f, 0x6d, 0x73, 0x12, 0x19, 0x2e, 0x72, 0x70, 0x63, 0x2e, 0x4c,
+	0x69, 0x73, 0x74, 0x43, 0x68, 0x61, 0x74, 0x52, 0x6f, 0x6f, 0x6d, 0x73, 0x52, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x1a, 0x1a, 0x2e, 0x72, 0x70, 0x63, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x43, 0x68,
+	0x61, 0x74, 0x52, 0x6f, 0x6f, 0x6d, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22,
+	0x00, 0x12, 0x3d, 0x0a, 0x0e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x43, 0x68, 0x61, 0x74, 0x52,
+	0x6f, 0x6f, 0x6d, 0x12, 0x1a, 0x2e, 0x72, 0x70, 0x63, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65,
+	0x43, 0x68, 0x61, 0x74, 0x52, 0x6f, 0x6f, 0x6d, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a,
+	0x0d, 0x2e, 0x72, 0x70, 0x63, 0x2e, 0x43, 0x68, 0x61, 0x74, 0x52, 0x6f, 0x6f, 0x6d, 0x22, 0x00,
+	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -230,22 +483,34 @@ func file_rpc_chat_proto_rawDescGZIP() []byte {
 	return file_rpc_chat_proto_rawDescData
 }
 
-var file_rpc_chat_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_rpc_chat_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_rpc_chat_proto_goTypes = []interface{}{
-	(*ChatMessage)(nil), // 0: rpc.ChatMessage
-	(*JoinChat)(nil),    // 1: rpc.JoinChat
-	(*Message)(nil),     // 2: rpc.Message
+	(*ChatMessage)(nil),           // 0: rpc.ChatMessage
+	(*JoinChat)(nil),              // 1: rpc.JoinChat
+	(*Message)(nil),               // 2: rpc.Message
+	(*ChatRoom)(nil),              // 3: rpc.ChatRoom
+	(*CreateChatRoomRequest)(nil), // 4: rpc.CreateChatRoomRequest
+	(*ListChatRoomsRequest)(nil),  // 5: rpc.ListChatRoomsRequest
+	(*ListChatRoomsResponse)(nil), // 6: rpc.ListChatRoomsResponse
+	(*DeleteChatRoomRequest)(nil), // 7: rpc.DeleteChatRoomRequest
 }
 var file_rpc_chat_proto_depIdxs = []int32{
 	1, // 0: rpc.ChatMessage.join:type_name -> rpc.JoinChat
 	2, // 1: rpc.ChatMessage.message:type_name -> rpc.Message
-	0, // 2: rpc.ChatRoom.Chat:input_type -> rpc.ChatMessage
-	2, // 3: rpc.ChatRoom.Chat:output_type -> rpc.Message
-	3, // [3:4] is the sub-list for method output_type
-	2, // [2:3] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	3, // 2: rpc.ListChatRoomsResponse.chat_rooms:type_name -> rpc.ChatRoom
+	0, // 3: rpc.ChatService.Chat:input_type -> rpc.ChatMessage
+	4, // 4: rpc.ChatService.CreateChatRoom:input_type -> rpc.CreateChatRoomRequest
+	5, // 5: rpc.ChatService.ListChatRooms:input_type -> rpc.ListChatRoomsRequest
+	7, // 6: rpc.ChatService.DeleteChatRoom:input_type -> rpc.DeleteChatRoomRequest
+	2, // 7: rpc.ChatService.Chat:output_type -> rpc.Message
+	3, // 8: rpc.ChatService.CreateChatRoom:output_type -> rpc.ChatRoom
+	6, // 9: rpc.ChatService.ListChatRooms:output_type -> rpc.ListChatRoomsResponse
+	3, // 10: rpc.ChatService.DeleteChatRoom:output_type -> rpc.ChatRoom
+	7, // [7:11] is the sub-list for method output_type
+	3, // [3:7] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_rpc_chat_proto_init() }
@@ -290,6 +555,66 @@ func file_rpc_chat_proto_init() {
 				return nil
 			}
 		}
+		file_rpc_chat_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ChatRoom); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_rpc_chat_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CreateChatRoomRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_rpc_chat_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListChatRoomsRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_rpc_chat_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListChatRoomsResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_rpc_chat_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DeleteChatRoomRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -297,7 +622,7 @@ func file_rpc_chat_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_rpc_chat_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
@@ -319,45 +644,48 @@ var _ grpc.ClientConnInterface
 // is compatible with the grpc package it is being compiled against.
 const _ = grpc.SupportPackageIsVersion6
 
-// ChatRoomClient is the client API for ChatRoom service.
+// ChatServiceClient is the client API for ChatService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
-type ChatRoomClient interface {
-	Chat(ctx context.Context, opts ...grpc.CallOption) (ChatRoom_ChatClient, error)
+type ChatServiceClient interface {
+	Chat(ctx context.Context, opts ...grpc.CallOption) (ChatService_ChatClient, error)
+	CreateChatRoom(ctx context.Context, in *CreateChatRoomRequest, opts ...grpc.CallOption) (*ChatRoom, error)
+	ListChatRooms(ctx context.Context, in *ListChatRoomsRequest, opts ...grpc.CallOption) (*ListChatRoomsResponse, error)
+	DeleteChatRoom(ctx context.Context, in *DeleteChatRoomRequest, opts ...grpc.CallOption) (*ChatRoom, error)
 }
 
-type chatRoomClient struct {
+type chatServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewChatRoomClient(cc grpc.ClientConnInterface) ChatRoomClient {
-	return &chatRoomClient{cc}
+func NewChatServiceClient(cc grpc.ClientConnInterface) ChatServiceClient {
+	return &chatServiceClient{cc}
 }
 
-func (c *chatRoomClient) Chat(ctx context.Context, opts ...grpc.CallOption) (ChatRoom_ChatClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_ChatRoom_serviceDesc.Streams[0], "/rpc.ChatRoom/Chat", opts...)
+func (c *chatServiceClient) Chat(ctx context.Context, opts ...grpc.CallOption) (ChatService_ChatClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_ChatService_serviceDesc.Streams[0], "/rpc.ChatService/Chat", opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &chatRoomChatClient{stream}
+	x := &chatServiceChatClient{stream}
 	return x, nil
 }
 
-type ChatRoom_ChatClient interface {
+type ChatService_ChatClient interface {
 	Send(*ChatMessage) error
 	Recv() (*Message, error)
 	grpc.ClientStream
 }
 
-type chatRoomChatClient struct {
+type chatServiceChatClient struct {
 	grpc.ClientStream
 }
 
-func (x *chatRoomChatClient) Send(m *ChatMessage) error {
+func (x *chatServiceChatClient) Send(m *ChatMessage) error {
 	return x.ClientStream.SendMsg(m)
 }
 
-func (x *chatRoomChatClient) Recv() (*Message, error) {
+func (x *chatServiceChatClient) Recv() (*Message, error) {
 	m := new(Message)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
@@ -365,42 +693,81 @@ func (x *chatRoomChatClient) Recv() (*Message, error) {
 	return m, nil
 }
 
-// ChatRoomServer is the server API for ChatRoom service.
-type ChatRoomServer interface {
-	Chat(ChatRoom_ChatServer) error
+func (c *chatServiceClient) CreateChatRoom(ctx context.Context, in *CreateChatRoomRequest, opts ...grpc.CallOption) (*ChatRoom, error) {
+	out := new(ChatRoom)
+	err := c.cc.Invoke(ctx, "/rpc.ChatService/CreateChatRoom", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
-// UnimplementedChatRoomServer can be embedded to have forward compatible implementations.
-type UnimplementedChatRoomServer struct {
+func (c *chatServiceClient) ListChatRooms(ctx context.Context, in *ListChatRoomsRequest, opts ...grpc.CallOption) (*ListChatRoomsResponse, error) {
+	out := new(ListChatRoomsResponse)
+	err := c.cc.Invoke(ctx, "/rpc.ChatService/ListChatRooms", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
-func (*UnimplementedChatRoomServer) Chat(ChatRoom_ChatServer) error {
+func (c *chatServiceClient) DeleteChatRoom(ctx context.Context, in *DeleteChatRoomRequest, opts ...grpc.CallOption) (*ChatRoom, error) {
+	out := new(ChatRoom)
+	err := c.cc.Invoke(ctx, "/rpc.ChatService/DeleteChatRoom", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ChatServiceServer is the server API for ChatService service.
+type ChatServiceServer interface {
+	Chat(ChatService_ChatServer) error
+	CreateChatRoom(context.Context, *CreateChatRoomRequest) (*ChatRoom, error)
+	ListChatRooms(context.Context, *ListChatRoomsRequest) (*ListChatRoomsResponse, error)
+	DeleteChatRoom(context.Context, *DeleteChatRoomRequest) (*ChatRoom, error)
+}
+
+// UnimplementedChatServiceServer can be embedded to have forward compatible implementations.
+type UnimplementedChatServiceServer struct {
+}
+
+func (*UnimplementedChatServiceServer) Chat(ChatService_ChatServer) error {
 	return status.Errorf(codes.Unimplemented, "method Chat not implemented")
 }
-
-func RegisterChatRoomServer(s *grpc.Server, srv ChatRoomServer) {
-	s.RegisterService(&_ChatRoom_serviceDesc, srv)
+func (*UnimplementedChatServiceServer) CreateChatRoom(context.Context, *CreateChatRoomRequest) (*ChatRoom, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateChatRoom not implemented")
+}
+func (*UnimplementedChatServiceServer) ListChatRooms(context.Context, *ListChatRoomsRequest) (*ListChatRoomsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListChatRooms not implemented")
+}
+func (*UnimplementedChatServiceServer) DeleteChatRoom(context.Context, *DeleteChatRoomRequest) (*ChatRoom, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteChatRoom not implemented")
 }
 
-func _ChatRoom_Chat_Handler(srv interface{}, stream grpc.ServerStream) error {
-	return srv.(ChatRoomServer).Chat(&chatRoomChatServer{stream})
+func RegisterChatServiceServer(s *grpc.Server, srv ChatServiceServer) {
+	s.RegisterService(&_ChatService_serviceDesc, srv)
 }
 
-type ChatRoom_ChatServer interface {
+func _ChatService_Chat_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(ChatServiceServer).Chat(&chatServiceChatServer{stream})
+}
+
+type ChatService_ChatServer interface {
 	Send(*Message) error
 	Recv() (*ChatMessage, error)
 	grpc.ServerStream
 }
 
-type chatRoomChatServer struct {
+type chatServiceChatServer struct {
 	grpc.ServerStream
 }
 
-func (x *chatRoomChatServer) Send(m *Message) error {
+func (x *chatServiceChatServer) Send(m *Message) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func (x *chatRoomChatServer) Recv() (*ChatMessage, error) {
+func (x *chatServiceChatServer) Recv() (*ChatMessage, error) {
 	m := new(ChatMessage)
 	if err := x.ServerStream.RecvMsg(m); err != nil {
 		return nil, err
@@ -408,14 +775,81 @@ func (x *chatRoomChatServer) Recv() (*ChatMessage, error) {
 	return m, nil
 }
 
-var _ChatRoom_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "rpc.ChatRoom",
-	HandlerType: (*ChatRoomServer)(nil),
-	Methods:     []grpc.MethodDesc{},
+func _ChatService_CreateChatRoom_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateChatRoomRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatServiceServer).CreateChatRoom(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/rpc.ChatService/CreateChatRoom",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatServiceServer).CreateChatRoom(ctx, req.(*CreateChatRoomRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatService_ListChatRooms_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListChatRoomsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatServiceServer).ListChatRooms(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/rpc.ChatService/ListChatRooms",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatServiceServer).ListChatRooms(ctx, req.(*ListChatRoomsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatService_DeleteChatRoom_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteChatRoomRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatServiceServer).DeleteChatRoom(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/rpc.ChatService/DeleteChatRoom",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatServiceServer).DeleteChatRoom(ctx, req.(*DeleteChatRoomRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _ChatService_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "rpc.ChatService",
+	HandlerType: (*ChatServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CreateChatRoom",
+			Handler:    _ChatService_CreateChatRoom_Handler,
+		},
+		{
+			MethodName: "ListChatRooms",
+			Handler:    _ChatService_ListChatRooms_Handler,
+		},
+		{
+			MethodName: "DeleteChatRoom",
+			Handler:    _ChatService_DeleteChatRoom_Handler,
+		},
+	},
 	Streams: []grpc.StreamDesc{
 		{
 			StreamName:    "Chat",
-			Handler:       _ChatRoom_Chat_Handler,
+			Handler:       _ChatService_Chat_Handler,
 			ServerStreams: true,
 			ClientStreams: true,
 		},

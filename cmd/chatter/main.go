@@ -6,6 +6,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"strconv"
 
 	"github.com/anzboi/proto-playground/pkg/rpc"
 	"google.golang.org/grpc"
@@ -13,8 +14,6 @@ import (
 )
 
 var (
-	roomID   = flag.String("room", "", "room id of chat room to connect to")
-	name     = flag.String("name", "anonymous", "name tag to use in chat room")
 	host     = flag.String("host", "localhost:8080", "chat server host address")
 	insecure = flag.Bool("insecure", false, "set insecure to true to use http instead of https")
 )
@@ -33,15 +32,52 @@ func main() {
 		panic(err)
 	}
 
-	client, err := rpc.NewChatServiceClient(cc).Chat(context.Background())
+	chatService := rpc.NewChatServiceClient(cc)
+
+	rooms, err := chatService.ListChatRooms(context.Background(), &rpc.ListChatRoomsRequest{})
+	if err != nil {
+		panic(err)
+	}
+
+	input := bufio.NewReader(os.Stdin)
+	fmt.Println("Chat rooms:")
+	roomMap := map[int]string{}
+	for i, room := range rooms.GetChatRooms() {
+		roomMap[i+1] = room.GetRoomId()
+		fmt.Printf("[%d]: %s\n", i+1, room.GetRoomId())
+	}
+	fmt.Print("Pick a room: ")
+	line, _, err := input.ReadLine()
+	if err != nil {
+		panic(err)
+	}
+	r, err := strconv.Atoi(string(line))
+	if err != nil {
+		fmt.Println("error: must input a number")
+		return
+	}
+	roomID, ok := roomMap[r]
+	if !ok {
+		fmt.Println("error: must select a room that exists")
+		return
+	}
+
+	fmt.Print("Enter Name tag: ")
+	nameLine, _, err := input.ReadLine()
+	if err != nil {
+		panic(err)
+	}
+	name := string(nameLine)
+
+	client, err := chatService.Chat(context.Background())
 	if err != nil {
 		panic(err)
 	}
 
 	join := &rpc.ChatMessage{
 		Join: &rpc.JoinChat{
-			RoomId: *roomID,
-			Name:   *name,
+			RoomId: roomID,
+			Name:   name,
 		},
 	}
 	client.Send(join)
@@ -58,7 +94,6 @@ func main() {
 		}
 	}()
 
-	input := bufio.NewReader(os.Stdin)
 	for {
 		line, _, err := input.ReadLine()
 		if err != nil {

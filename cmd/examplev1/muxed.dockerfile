@@ -5,7 +5,13 @@ COPY go.sum go.sum
 COPY cmd/examplev1 cmd/examplev1
 COPY pkg pkg
 
-RUN go build -o bin/examplev1 ./cmd/examplev1/example-muxed
+RUN GO111MODULE=on CGO_ENABLED=1 GOOS=linux GOARCH=amd64 \
+	go build \
+	-ldflags=" \
+		-linkmode=external \
+	" \
+	-o bin/examplev1 \
+	./cmd/examplev1/example-muxed
 
 FROM gcr.io/distroless/base:latest
 COPY --from=builder /workspace/bin/examplev1 /bin/examplev1

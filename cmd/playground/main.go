@@ -9,7 +9,16 @@ import (
 )
 
 func main() {
-	ExampleProtoJSONBreak()
+	ExampleEmbeddedMessage()
+}
+
+func ExampleLargeFieldNumber() {
+	m := &types.MessageV5{
+		LargeFieldnum: 7,
+	}
+	raw, _ := proto.Marshal(m)
+	fmt.Println("Message:", m)
+	fmt.Println("bytes:", raw)
 }
 
 func ExampleMarshal() {
@@ -132,8 +141,8 @@ func ExampleProtoJSONBreak() {
 	raw, _ := proto.Marshal(&m1)
 	_ = proto.Unmarshal(raw, &m4)
 
-	json1, _ := json.Marshal(m1)
-	json4, _ := json.Marshal(m4)
+	json1, _ := json.Marshal(&m1)
+	json4, _ := json.Marshal(&m4)
 
 	fmt.Println("MessageV1:", &m1)
 	fmt.Println("Json1:", string(json1))
@@ -177,4 +186,13 @@ func ExampleEnumNotExists() {
 
 	// Output: status: code:Code_TWO
 	// status: code:3
+}
+
+func ExampleEmbeddedMessage() {
+	m := &types.Embedded{}
+	raw, _ := proto.Marshal(m)
+	fmt.Println(raw)
+	m2 := types.Embedded{}
+	proto.Unmarshal(raw, &m2)
+	fmt.Println(m2.GetMsg() == nil)
 }

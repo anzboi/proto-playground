@@ -1,0 +1,23 @@
+syntax = 'proto3';
+
+package anzboi.example.v1;
+
+option go_package = "github.com/anzboi/proto-playground/pkg/api/example/v1;example";
+
+import "google/api/annotations.proto";
+
+service HelloWorld {
+    rpc SayHello(HelloRequest) returns (HelloResponse) {
+        option (google.api.http) = {
+            get: '/v1/example/hello'
+        };
+    };
+}
+
+message HelloRequest {
+    string name = 1;
+}
+
+message HelloResponse {
+    string message = 1;
+}

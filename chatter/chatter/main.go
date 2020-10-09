@@ -14,6 +14,7 @@ import (
 )
 
 var (
+	create   = flag.Bool("create", false, "create a chat room")
 	host     = flag.String("host", "localhost:8080", "chat server host address")
 	insecure = flag.Bool("insecure", false, "set insecure to true to use http instead of https")
 )
@@ -33,6 +34,15 @@ func main() {
 	}
 
 	chatService := rpc.NewChatServiceClient(cc)
+
+	if *create {
+		resp, err := chatService.CreateChatRoom(context.Background(), &rpc.CreateChatRoomRequest{})
+		if err != nil {
+			panic(err)
+		}
+		fmt.Printf("Chat room created: %s\n", resp.GetRoomId())
+		return
+	}
 
 	rooms, err := chatService.ListChatRooms(context.Background(), &rpc.ListChatRoomsRequest{})
 	if err != nil {

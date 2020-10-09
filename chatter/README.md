@@ -53,3 +53,11 @@ Me: Has joined the chat
 ```
 
 Run multiple clients to simulate multiple chatting users. Each connected client opens their own bidirectional stream to the server.
+
+## Behind the scenes
+
+The chat server implements a really crufty pub-sub model and allows goroutines to subscribe to a chatroom and publish messages to it. The Chat RPC simply connects a stream to a chat room.
+
+When the server receives a stream message from the client, it publishes it to the channel so it is picked up by all the subscribers. When the stream picks up a message on the chat room, it streams it back to the client.
+
+On top of this, the chat server to host multiple chat rooms which can be created and deleted through the `CreateChatRoom` and `DeleteChatRoom` RPCs respectively. The first message the server receives from the client must contain JoinParameters which tell it which chat room the stream wants to connect to, and the user tag the stream will be posting messages as. All subsequent messages will be treated as ordinary chat messages.

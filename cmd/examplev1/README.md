@@ -4,9 +4,18 @@ ExampleV1 is a set of basic microservices that all implement the same gRPC servi
 
 ## Run
 
-All the examples
+All the examples can be run using `go run` or by building a docker container with the relevant dockerfile
 
 ### example-cmuxed
+
+```sh
+# go run
+go run example-cmuxed
+
+# docker
+docker build -t example-cmuxed -f cmuxed.dockerfile ../../
+docker run -it -p 8080:8080 example-cmuxed
+```
 
 * cmux for muxing http vs grpc requests. Serves both on port 8080 (settable via env var `PORT`)
 * external calls for gateway -> grpc connection
@@ -14,11 +23,29 @@ All the examples
 
 ### example-muxed
 
+```sh
+# go run
+go run example-muxed
+
+# docker
+docker build -t example-muxed -f muxed.dockerfile ../../
+docker run -it -p 8080:8080 example-muxed
+```
+
 * http mux for muxing http vs grpc requests. Serves both on port 8080 (settable via env var `PORT`)
 * external calls for gateway -> grpc connection
 * No tracing/metrics instrumentation
 
 ### example-split
+
+```sh
+# go run
+go run example-split
+
+# docker
+docker build -t example-split -f split.dockerfile ../../
+docker run -it -p 8080:8080 example-split
+```
 
 * http mux for muxing http vs grpc requests. Serves grpc on port 8080 (`PORT`) and http on 8081 (`HTTP_PORT`)
 * external calls for gateway -> grpc connection

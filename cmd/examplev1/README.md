@@ -4,7 +4,15 @@ ExampleV1 is a set of basic microservices that all implement the same gRPC servi
 
 ## Run
 
-All the examples can be run using `go run` or by building a docker container with the relevant dockerfile
+All the examples can be run using `go run` or by building a docker container with the relevant dockerfile. With a service running, you can hit is with the following requests
+
+```sh
+# grpcurl the service
+grpcurl --plaintext -d '{"name": "anzboi"}' <host>:<port> anzboi.example.v1/HelloWorld
+
+# curl the gateway
+curl http://<host>:<port>/v1/example/hello?name=anzboi
+```
 
 ### example-cmuxed
 

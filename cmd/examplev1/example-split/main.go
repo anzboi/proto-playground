@@ -109,12 +109,12 @@ func RunGRPCServer(impl example.HelloWorldServer) error {
 	svr := grpc.NewServer(
 		grpc.ChainUnaryInterceptor(
 			MetricsUnaryServerInterceptor(errCounter, latencyRecorder),
-			otelgrpc.UnaryServerInterceptor(global.Tracer("")),
+			otelgrpc.UnaryServerInterceptor(otelgrpc.WithTracerProvider(global.Tracer("")),
 			// other interceptors
 		),
 		grpc.ChainStreamInterceptor(
 			MetricsStreamServerInterceptor(errCounter),
-			otelgrpc.StreamServerInterceptor(global.Tracer("")),
+			otelgrpc.StreamServerInterceptor(otelgrpc.WithTracerProvider(global.Tracer("")),
 			// other interceptors
 		),
 	)

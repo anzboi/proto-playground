@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/anzboi/proto-playground/cmd/examplev1"
 	"github.com/anzboi/proto-playground/pkg/api/example"
@@ -15,8 +16,10 @@ import (
 	"go.opentelemetry.io/contrib/detectors/gcp"
 	"go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc"
 	"go.opentelemetry.io/otel/api/global"
+	metrics "go.opentelemetry.io/otel/api/metric"
 	"go.opentelemetry.io/otel/exporters/otlp"
 	stdoutexporter "go.opentelemetry.io/otel/exporters/stdout"
+	"go.opentelemetry.io/otel/label"
 	"go.opentelemetry.io/otel/sdk/export/metric"
 	"go.opentelemetry.io/otel/sdk/export/trace"
 	"go.opentelemetry.io/otel/sdk/metric/controller/push"
@@ -26,6 +29,7 @@ import (
 	sdktrace "go.opentelemetry.io/otel/sdk/trace"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
+	"google.golang.org/grpc/status"
 )
 
 var (
@@ -66,7 +70,6 @@ func setupOpenTelemetry(ctx context.Context) (func(), error) {
 		sdktrace.WithResource(resource),
 		sdktrace.WithSyncer(exporter),
 	)
-
 	global.SetTracerProvider(tp)
 	global.SetMeterProvider(pusher.MeterProvider())
 	return close, nil
@@ -96,12 +99,21 @@ func main() {
 }
 
 func RunGRPCServer(impl example.HelloWorldServer) error {
+	meter := global.Meter("grpc-meter")
+	errCounter, err := meter.NewInt64Counter("grpc_request_error_count")
+	latencyRecorder, err := meter.NewInt64ValueRecorder("grpc_request_latency")
+	if err != nil {
+		return err
+	}
+
 	svr := grpc.NewServer(
 		grpc.ChainUnaryInterceptor(
+			MetricsUnaryServerInterceptor(errCounter, latencyRecorder),
 			otelgrpc.UnaryServerInterceptor(global.Tracer("")),
 			// other interceptors
 		),
 		grpc.ChainStreamInterceptor(
+			MetricsStreamServerInterceptor(errCounter),
 			otelgrpc.StreamServerInterceptor(global.Tracer("")),
 			// other interceptors
 		),
@@ -134,6 +146,29 @@ func RunHTTPGateway() error {
 
 	log.Printf("http listening on %s", httpAddr())
 	return http.ListenAndServe(httpAddr(), mux)
+}
+
+func MetricsUnaryServerInterceptor(errCounter metrics.Int64Counter, latencyRecorder metrics.Int64ValueRecorder) grpc.UnaryServerInterceptor {
+	return func(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (resp interface{}, err error) {
+		now := time.Now()
+		resp, err = handler(ctx, req)
+		latency := time.Now().Sub(now)
+		latencyRecorder.Record(ctx, latency.Nanoseconds(), label.KeyValue{Key: "rpc", Value: label.StringValue(info.FullMethod)})
+		if err != nil {
+			errCounter.Add(ctx, 1, label.KeyValue{Key: "grpc_status", Value: label.IntValue(int(status.Code(err)))})
+		}
+		return
+	}
+}
+
+func MetricsStreamServerInterceptor(errCounter metrics.Int64Counter) grpc.StreamServerInterceptor {
+	return func(srv interface{}, ss grpc.ServerStream, info *grpc.StreamServerInfo, handler grpc.StreamHandler) error {
+		err := handler(srv, ss)
+		if err != nil {
+			errCounter.Add(ss.Context(), 1, label.KeyValue{Key: "grpc_status", Value: label.IntValue(int(status.Code(err)))})
+		}
+		return err
+	}
 }
 
 func grpcAddr() string {

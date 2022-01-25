@@ -1,6 +1,6 @@
 # Chatter
 
-Chatter is a very simple chat server over gRPC. Chatter is intended to be used to test bidirectional streams.
+Chatter is a very simple chat server over gRPC. Chatter is used to demonstrate and test various features and tooling against gRPC. It exposes a few RPCs including unary RPCs, as well as client, server and bidirectional streams.
 
 ## Install
 

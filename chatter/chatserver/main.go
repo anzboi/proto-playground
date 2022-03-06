@@ -50,7 +50,7 @@ func getHealth() grpc_health_v1.HealthCheckResponse_ServingStatus {
 	health := os.Getenv("HEALTH")
 	health = strings.ToLower(health)
 	switch health {
-	case "1", "serving":
+	case "", "1", "serving":
 		return grpc_health_v1.HealthCheckResponse_SERVING
 	case "2", "not_serving":
 		return grpc_health_v1.HealthCheckResponse_NOT_SERVING

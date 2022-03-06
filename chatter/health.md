@@ -12,4 +12,4 @@ The health service defines 2 rpcs, a simple `Check` RPC and a `Watch` RPC. Both 
 
 The chatter service implements a simple health check server. It does not actively monitor its own health, so status will not change over the services lifespan.
 
-To change the health status for testing purposes, set the `HEALTH` environment variables to one of the following enum values (`SERVING`, `NOT_SERVING`, `SERVICE_UNKNOWN`)
+To change the health status for testing purposes, set the `HEALTH` environment variables to one of the following enum values (`SERVING`, `NOT_SERVING`, `SERVICE_UNKNOWN`). Default is `SERVING`.
